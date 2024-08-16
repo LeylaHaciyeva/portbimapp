@@ -1,0 +1,58 @@
+.page-header {
+    background-color: white;
+    height: 100px;
+    width: 100%;
+    border-bottom: 1px solid #ebebeb;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+}
+
+.page-logo a {
+    color: black;
+    cursor: pointer;
+    text-decoration: none;
+    cursor: url(../../../images/cursor-pointer.png) 0 0, url(../../../images/cursor-pointer.png) 0 0, auto;
+    font-size: 40px;
+
+}
+
+#page-language {
+    background: none;
+    color: black;
+    appearance: none;
+    border: none;
+    text-transform: uppercase;
+    padding: 15px;
+    cursor: url(../../../images/cursor-pointer.png) 0 0, url(../../../images/cursor-pointer.png) 0 0, auto;
+
+}
+
+#page-language option {
+    background-color: white;
+    border: none;
+    color: black;
+
+}
+
+.theme {
+    border: 2px solid black;
+    border-radius: 10px;
+    width: auto;
+    height: 40px;
+    padding: 0px 15px;
+    cursor: url(../../../images/cursor-pointer.png) 0 0, url(../../../images/cursor-pointer.png) 0 0, auto;
+
+}
+
+.theme div {
+    cursor: url(../../../images/cursor-pointer.png) 0 0, url(../../../images/cursor-pointer.png) 0 0, auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.menu {
+    padding: 15px;
+    cursor: url(../../../images/cursor-pointer.png) 0 0, url(../../../images/cursor-pointer.png) 0 0, auto !important;
+}
