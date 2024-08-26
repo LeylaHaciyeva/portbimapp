@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import aboutimage from '../../images/detailslider1.jpg'
 import Header from '../../components/header/mainheader/Header'
 import './About.css'
@@ -13,38 +13,51 @@ import clientlogo2 from '../../images/clientLogo2.png'
 import Footer from '../../components/footer/Footer'
 import about2 from '../../images/about2.png'
 import about3 from '../../images/about3.png'
+import axios from 'axios';
 const About = () => {
+  const [content, setContent] = useState(null);
+  const [language, setLanguage] = useState("en")
+  const fetchContent = async () => {
+    console.log("fetch content");
+    try {
+      const response = await axios.get(`http://localhost:8080/api/about/${language}`);
+      setContent(response.data);
+      console.log(response.data);
+    } catch (error) {
+      console.error('Error fetching about us content:', error);
+    }
+  };
+  useEffect(() => {
+    console.log("hiiii");
+    fetchContent();
+  }, []);
   return (
     <div>
       <PageHeader />
-      <div className='about-image'>
-        <div></div>
-        <p>About</p>
+      <div className='about-image' >
+        <div style={{ "backgroundImage": `url(data:image/jpeg;base64,${content?.mainImage})` }}></div>
+        <p>{content?.header}</p>
       </div>
       <div className='container about-text-container'>
         <h2>
-          PORTBİM - YÜKSƏK SƏVİYYƏLİ MEP & F DİZAYN VƏ BİM (BİNA MƏLUMAT MODELLƏŞDİRMƏSİ) TƏTBİQ ÇÖZÜMLƏRİ TƏKLİF EDƏN MÜHƏNDISLİK ŞIRKƏTİDİR.
+          {
+            content?.descHeader
+          }
         </h2>
         <div className='about-text-desc row'>
           <div className='col-lg-6'>
-            <p>Hekayəmiz 2013-cü ildə başladı. Bu qısa müddət ərzində komandamız onlarla sənaye və qeyri-sənaye
-              layihələrini uğurla başa vurmağı bacardı. Ən son texnologiya və standartlardan istifadə edərək, yüksək ixtisaslı
-              və fədakar kadrlarımız sayəsində minimum layihə təhvil müddəti, xərcləri və xətası ilə LOD500 dizayn həllini təmin
-              etmə bacarığına sahibik. </p>
+            <p>{content?.desc1}</p>
           </div>
           <div className='col-lg-6'>
             <p>
-              Hər növ binalar üçün mexaniki, elektrik və santexnika mühəndislik dizayn xidmətləri təqdim edirik.
-              Dizaynımızda bina sistemlərinin etibarlılığını və səmərəliliyini təmin edirik. Yeni və dəyişdirilmiş binalar
-              üçün bütün MEP sistemlərinin konseptual və detallı dizaynı zamanı müştərimizə dəstək olaraq dizaynlarımızın icrasına
-              nəzarət edirik və başa çatdıqdan sonra sınaq testlərini aparırıq.
+              {content?.desc1}
             </p>
           </div>
         </div>
       </div>
       <div className='clients container'>
         <div>
-          <h2>Clients</h2>
+          <h2>{content?.clientHeader}</h2>
           <Swiper
             modules={[Autoplay, Pagination]}
             autoplay={{
@@ -60,38 +73,28 @@ const About = () => {
             onSlideChange={() => console.log('slide change')}
             onSwiper={(swiper) => console.log(swiper)}
           >
-            <SwiperSlide><img className='swiper-image' src={clientlogo} title="" /></SwiperSlide>
-            <SwiperSlide><img className='swiper-image' src={clientlogo2} title="" /></SwiperSlide>
-            <SwiperSlide><img className='swiper-image' src={clientlogo} title="" /></SwiperSlide>
-            <SwiperSlide><img className='swiper-image' src={clientlogo2} title="" /></SwiperSlide>
-            <SwiperSlide><img className='swiper-image' src={clientlogo} title="" /></SwiperSlide>
-            <SwiperSlide><img className='swiper-image' src={clientlogo2} title="" /></SwiperSlide>
-            <SwiperSlide><img className='swiper-image' src={clientlogo} title="" /></SwiperSlide>
-            <SwiperSlide><img className='swiper-image' src={clientlogo2} title="" /></SwiperSlide>
-            <SwiperSlide><img className='swiper-image' src={clientlogo} title="" /></SwiperSlide>
-            <SwiperSlide><img className='swiper-image' src={clientlogo2} title="" /></SwiperSlide>
-            <SwiperSlide><img className='swiper-image' src={clientlogo} title="" /></SwiperSlide>
-            <SwiperSlide><img className='swiper-image' src={clientlogo2} title="" /></SwiperSlide>
+            {
+              content ? content?.clientImages.map((src) => {
+                return (
+                  <SwiperSlide><img className='swiper-image' src={`data:image/jpeg;base64,${src}`} title="" /></SwiperSlide>
+                )
+              }) : null
+            }
+
           </Swiper>
         </div>
       </div>
-
       <div className='about-between'>
-
-    
-    <div className='about-image2' style={{ background: `url(${about2}) no-repeat bottom center fixed`, height: "500px", backgroundSize: "cover" }}></div>
+        <div className='about-image2' style={{ background: `url(data:image/jpeg;base64,${content?.descImage1}) no-repeat bottom center fixed`, height: "500px", backgroundSize: "cover" }}></div>
         <div className='between-text container text-center pt-5 mt-5 pb-5 pt-5 mb-5'>
-          <h4>CARBON FREE SOLUTIONS TO ACCELERATE ENERGY TRANSITION AND SUSTAINABLE GROWTH.</h4>
-          <h5>The business is architected to add value in the Complex and Mid-Stream segment of the Energy Transition</h5>
+          <h4>{content?.descBetweenHeader}</h4>
+          <h5>{content?.descBetweenDescription}</h5>
         </div>
-        <div className='about-image3' style={{ background: `url(${about3}) no-repeat bottom center fixed`, height: "500px" , backgroundSize: "cover"}}></div>
-
+        <div className='about-image3' style={{ background: `url(${content?.descImage2}) no-repeat bottom center fixed`, height: "500px", backgroundSize: "cover" }}></div>
       </div>
-
-
       <div className='tools container'>
         <div>
-          <h2>Tools</h2>
+          <h2>{content?.toolHeader}</h2>
           <Swiper
             modules={[Autoplay, Pagination]}
             autoplay={{
@@ -106,18 +109,13 @@ const About = () => {
             onSlideChange={() => console.log('slide change')}
             onSwiper={(swiper) => console.log(swiper)}
           >
-            <SwiperSlide><img className='swiper-image' src={clientlogo} title="" /></SwiperSlide>
-            <SwiperSlide><img className='swiper-image' src={clientlogo2} title="" /></SwiperSlide>
-            <SwiperSlide><img className='swiper-image' src={clientlogo} title="" /></SwiperSlide>
-            <SwiperSlide><img className='swiper-image' src={clientlogo2} title="" /></SwiperSlide>
-            <SwiperSlide><img className='swiper-image' src={clientlogo} title="" /></SwiperSlide>
-            <SwiperSlide><img className='swiper-image' src={clientlogo2} title="" /></SwiperSlide>
-            <SwiperSlide><img className='swiper-image' src={clientlogo} title="" /></SwiperSlide>
-            <SwiperSlide><img className='swiper-image' src={clientlogo2} title="" /></SwiperSlide>
-            <SwiperSlide><img className='swiper-image' src={clientlogo} title="" /></SwiperSlide>
-            <SwiperSlide><img className='swiper-image' src={clientlogo2} title="" /></SwiperSlide>
-            <SwiperSlide><img className='swiper-image' src={clientlogo} title="" /></SwiperSlide>
-            <SwiperSlide><img className='swiper-image' src={clientlogo2} title="" /></SwiperSlide>
+           {
+              content ? content?.toolImages.map((src) => {
+                return (
+                  <SwiperSlide><img className='swiper-image' src={`data:image/jpeg;base64,${src}`} title="" /></SwiperSlide>
+                )
+              }) : null
+            }
           </Swiper>
         </div>
       </div>
@@ -146,3 +144,40 @@ const About = () => {
 }
 
 export default About
+
+
+// import React, { useState, useEffect } from 'react';
+// import axios from 'axios';
+
+// const Content = () => {
+//     const [content, setContent] = useState(null);
+//     const fetchContent = async () => {
+//         console.log("fetch content");
+//         try {
+//             const response = await axios.get(`http://localhost:8080/api/about/en`);
+//             setContent(response.data);
+//             console.log(response.data);
+
+//         } catch (error) {
+//             console.error('Error fetching about us content:', error);
+//         }
+//     };
+//     useEffect(() => {
+//         console.log("hiiii");
+//         fetchContent();
+//     }, []);
+//     return <div>
+//         {
+//             content ? <><img src={`data:image/jpeg;base64,${content.mainImage}`} /> <div>{content?.language}</div></> : null
+//         }
+//         {/* {
+//             content ? content.images.map((src) => {
+//                 return(
+//                 <img src={`data:image/jpeg;base64,${src}`} />
+//                 )
+//             }) : null
+//         } */}
+//     </div>;
+// };
+
+// export default Content;

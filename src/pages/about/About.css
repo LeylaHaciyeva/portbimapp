@@ -1,11 +1,11 @@
 .about-image {}
 
 .about-image div {
-    background-image: url(../../images/detailslider1.jpg);
     width: 100%;
     background-attachment: fixed;
     height: 100vh;
     background-position: center center;
+    background-repeat: no-repeat;
 }
 
 .about-image p {
@@ -15,7 +15,7 @@
     line-height: 1em;
     height: 1em;
     left: 6%;
-    bottom: 0;
+    bottom: 8%;
     color: #fff;
 }
 
@@ -47,6 +47,8 @@
 
 .swiper-image {
     object-fit: cover;
+    width: 150px;
+    height: 150px;
 }
 
 .swiper-wrapper {
