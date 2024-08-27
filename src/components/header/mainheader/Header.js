@@ -5,17 +5,19 @@ import { CiSearch } from "react-icons/ci";
 import '../mainheader/Header.css'
 import Navbar from '../../navbar/Navbar.js';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { IoSunnyOutline } from "react-icons/io5";
 import { IoMoonOutline } from "react-icons/io5";
 const Header = () => {
   let openMenu = useSelector((state) => state.menuReducer.openMenu)
   let theme = useSelector((state) => state.themeReducer.theme)
   const dispatch = useDispatch()
+  const navigate = useNavigate();
   let lang = useSelector((state) => state.languageReducer.lang)
   let lngs = [{ id: 1, lng: "az" }, { id: 2, lng: "en" }, { id: 3, lng: "ru" }]
   const handleChangeLanguage = (event) => {
     dispatch({ type: event.target.value, payload: lang })
+    navigate(`/${event.target.value}/${window.location.pathname.split('/').slice(2).join('/')}`);
   };
   function handleDarkMode() {
     dispatch({ type: "DARK", payload: theme })
@@ -24,9 +26,9 @@ const Header = () => {
   function handleLightMode() {
     dispatch({ type: "LIGHT", payload: theme })
   }
-function handleClose() {
-  dispatch({type:"closeMenu"})
-}
+  function handleClose() {
+    dispatch({ type: "closeMenu" })
+  }
 
 
   return (
@@ -36,7 +38,7 @@ function handleClose() {
         <div className="row d-flex align-items-center justify-content-center">
           <div className="col-lg-6 col-6 col-md-6 col-sm-6">
             <h2 className="logo">
-              <Link to="/" onClick={handleClose}>PortBIM</Link></h2>
+              <Link to={`/${lang}`} onClick={handleClose}>PortBIM</Link></h2>
           </div>
           <div className="col-lg-6 col-6 col-md-6 col-sm-6 header-right d-flex justify-content-end align-items-center">
             <div className='theme d-flex'>

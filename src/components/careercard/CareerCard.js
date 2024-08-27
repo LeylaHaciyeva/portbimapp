@@ -1,31 +1,35 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './CareerCard.css'
 import { Link } from 'react-router-dom'
-const CareerCard = () => {
+import { useSelector } from 'react-redux'
+import axios from 'axios';
+const CareerCard = ({ item }) => {
+
+    let lang = useSelector((state) => state.languageReducer.lang)
     return (
-        <Link to="/carddetail">
-        <div className='container career-card'>
-            <div className='row'>
-                        <div className='col-lg-4'>
-                            <div>
-                                <p className=''>Position</p>
-                                <p className='position'>Electrical Design Engineer</p>
-                            </div>
+        <Link to={`/${lang}/careers/${item.id}`}>
+            <div className='container career-card'>
+                <div className='row'>
+                    <div className='col-lg-4'>
+                        <div>
+                            <p className=''>Position</p>
+                            <p className='position'>{item?.position}</p>
                         </div>
-                        <div className='col-lg-4 d-flex justify-content-center'>
-                            <div>
-                                <p className=''>Location</p>
-                                <p className='location'>Baku</p>
-                            </div>
+                    </div>
+                    <div className='col-lg-4 d-flex justify-content-center'>
+                        <div>
+                            <p className=''>Location</p>
+                            <p className='location'>{item?.location}</p>
                         </div>
-                        <div className='col-lg-4 d-flex justify-content-end'>
-                            <div>
-                                <p>Iş növü</p>
-                                <p className='type'>Tam iş günü</p>
-                            </div>
+                    </div>
+                    <div className='col-lg-4 d-flex justify-content-end'>
+                        <div>
+                            <p>Iş növü</p>
+                            <p className='type'>{item?.type}</p>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
         </Link>
     )
 }

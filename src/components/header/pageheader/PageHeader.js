@@ -5,16 +5,18 @@ import { CiSearch } from "react-icons/ci";
 import './PageHeader.css'
 import Navbar from '../../navbar/Navbar.js';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { IoMoonOutline, IoSunnyOutline } from 'react-icons/io5';
 const PageHeader = () => {
   let openMenu = useSelector((state) => state.menuReducer.openMenu)
   let theme = useSelector((state) => state.themeReducer.theme)
   const dispatch = useDispatch()
-  let [language, setLanguage] = useState("en")
+  const navigate = useNavigate()
+  let lang = useSelector((state) => state.languageReducer.lang)
   let lngs = [{ id: 1, lng: "az" }, { id: 2, lng: "en" }, { id: 3, lng: "ru" }]
   const handleChangeLanguage = (event) => {
-    setLanguage(event.target.value);
+    dispatch({ type: event.target.value, payload: lang })
+    navigate(`/${event.target.value}/${window.location.pathname.split('/').slice(2).join('/')}`);
   };
   function handleDarkMode() {
     dispatch({ type: "DARK", payload: theme })
@@ -29,9 +31,8 @@ const PageHeader = () => {
     openMenu ? window.document.body.style.overflow = "hidden" : window.document.body.style.overflow = "auto"
   }, [openMenu])
   function handleClose() {
-    dispatch({type:"closeMenu"})
+    dispatch({ type: "closeMenu" })
   }
-  
   return (
     <div className={theme ? 'page-header d-flex align-items-center justify-content-center'
       : " page-header d-flex align-items-center justify-content-center"}>
@@ -54,7 +55,7 @@ const PageHeader = () => {
             </div>
             <div className='language mr-2'>
               {/* <GrLanguage cursor="pointer" color='white' size={20} className='' /> */}
-              <select id='page-language' value={language} onChange={handleChangeLanguage}>
+              <select id='page-language' value={lang} defaultValue={lang} onChange={handleChangeLanguage}>
                 {Object.values(lngs).map((lng) => (
                   <option key={lng.id} value={lng.lng}>
                     {lng.lng}

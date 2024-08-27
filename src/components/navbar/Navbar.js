@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 const Navbar = () => {
   let openMenu = useSelector((state) => state.menuReducer.openMenu)
+  let lang = useSelector((state) => state.languageReducer.lang)
   function handleClose() {
     dispatch({ type: "closeMenu", payload: openMenu })
   }
@@ -24,25 +25,25 @@ const Navbar = () => {
         <span className='navbar-header-text' >Menu</span>
         <ul className='navbar-menu-links'>
           <li>
-            <Link to="/about" onClick={handleClose}>About</Link>
+            <Link to={`/${lang}/about`} onClick={handleClose}>About</Link>
           </li>
           <li>
-            <Link to="/projects" onClick={handleClose}>Projects</Link>
+            <Link to={`/${lang}/projects`} onClick={handleClose}>Projects</Link>
           </li>
           <li>
-            <Link to="/design" onClick={handleClose}>Design and MEP</Link>
+            <Link to={`/${lang}/design`} onClick={handleClose}>Design and MEP</Link>
           </li>
           <li>
-            <Link to="/bimservices" onClick={handleClose}>BIM Services</Link>
+            <Link to={`/${lang}/bimservices`} onClick={handleClose}>BIM Services</Link>
           </li>
           <li>
-            <Link to="/news" onClick={handleClose}>News</Link>
+            <Link to={`/${lang}/news`} onClick={handleClose}>News</Link>
           </li>
           <li>
-            <Link to="/careers" onClick={handleClose}>Careers</Link>
+            <Link to={`/${lang}/careers`} onClick={handleClose}>Careers</Link>
           </li>
           <li>
-            <Link to="/contact" onClick={handleClose}>Contact</Link>
+            <Link to={`/${lang}/contact`} onClick={handleClose}>Contact</Link>
           </li>
         </ul>
       </div>

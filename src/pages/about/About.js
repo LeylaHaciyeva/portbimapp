@@ -14,23 +14,24 @@ import Footer from '../../components/footer/Footer'
 import about2 from '../../images/about2.png'
 import about3 from '../../images/about3.png'
 import axios from 'axios';
+import { useSelector } from 'react-redux'
 const About = () => {
   const [content, setContent] = useState(null);
-  const [language, setLanguage] = useState("en")
+  let lang = useSelector((state) => state.languageReducer.lang)
   const fetchContent = async () => {
     console.log("fetch content");
     try {
-      const response = await axios.get(`http://localhost:8080/api/about/${language}`);
+      const response = await axios.get(`http://localhost:8080/api/about/${lang}`);
       setContent(response.data);
-      console.log(response.data);
+      // console.log(response.data);
     } catch (error) {
       console.error('Error fetching about us content:', error);
     }
   };
   useEffect(() => {
-    console.log("hiiii");
+    // console.log("hiiii");
     fetchContent();
-  }, []);
+  }, [lang]);
   return (
     <div>
       <PageHeader />
@@ -63,20 +64,19 @@ const About = () => {
             autoplay={{
               delay: 0,
               pauseOnMouseEnter: true,
-              disableOnInteraction: false
+              disableOnInteraction: true
             }}
-            // cssMode={true}
             loop={true}
             className='swiper'
             spaceBetween={50}
             slidesPerView={5}
-            onSlideChange={() => console.log('slide change')}
-            onSwiper={(swiper) => console.log(swiper)}
+            // onSlideChange={() => console.log('slide change')}
+            // onSwiper={(swiper) => console.log(swiper)}
           >
             {
-              content ? content?.clientImages.map((src) => {
+              content ? content?.clientImages.map((src,index) => {
                 return (
-                  <SwiperSlide><img className='swiper-image' src={`data:image/jpeg;base64,${src}`} title="" /></SwiperSlide>
+                  <SwiperSlide  key={index}><img className='swiper-image' src={`data:image/jpeg;base64,${src}`} title="" /></SwiperSlide>
                 )
               }) : null
             }
@@ -85,12 +85,12 @@ const About = () => {
         </div>
       </div>
       <div className='about-between'>
-        <div className='about-image2' style={{ background: `url(data:image/jpeg;base64,${content?.descImage1}) no-repeat bottom center fixed`, height: "500px", backgroundSize: "cover" }}></div>
+        <div className='about-image2' style={{ background: `url(data:image/jpeg;base64,${content?.descImage1}) no-repeat bottom center fixed`, height: "500px", }}></div>
         <div className='between-text container text-center pt-5 mt-5 pb-5 pt-5 mb-5'>
           <h4>{content?.descBetweenHeader}</h4>
           <h5>{content?.descBetweenDescription}</h5>
         </div>
-        <div className='about-image3' style={{ background: `url(${content?.descImage2}) no-repeat bottom center fixed`, height: "500px", backgroundSize: "cover" }}></div>
+        <div className='about-image3' style={{ background: `url(data:image/jpeg;base64,${content?.descImage2}) no-repeat bottom center fixed`, height: "500px",  }}></div>
       </div>
       <div className='tools container'>
         <div>
@@ -100,19 +100,19 @@ const About = () => {
             autoplay={{
               delay: 0,
               pauseOnMouseEnter: true,
-              disableOnInteraction: false
+              disableOnInteraction: true
             }}
             loop={true}
             className='swiper'
             spaceBetween={50}
             slidesPerView={5}
-            onSlideChange={() => console.log('slide change')}
-            onSwiper={(swiper) => console.log(swiper)}
+            // onSlideChange={() => console.log('slide change')}
+            // onSwiper={(swiper) => console.log(swiper)}
           >
-           {
-              content ? content?.toolImages.map((src) => {
+            {
+              content ? content?.toolImages.map((src,index) => {
                 return (
-                  <SwiperSlide><img className='swiper-image' src={`data:image/jpeg;base64,${src}`} title="" /></SwiperSlide>
+                  <SwiperSlide key={index}><img className='swiper-image' src={`data:image/jpeg;base64,${src}`} title="" /></SwiperSlide>
                 )
               }) : null
             }
