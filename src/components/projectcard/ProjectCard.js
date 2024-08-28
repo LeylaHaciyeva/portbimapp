@@ -5,10 +5,13 @@ import Button from 'react-bootstrap/Button'
 import cardImage from '../../images/card.jpg'
 import { Link } from 'react-router-dom'
 import { GoArrowRight } from "react-icons/go";
+import { useSelector } from 'react-redux'
 const ProjectCard = () => {
+    let lang = useSelector((state) => state.languageReducer.lang)
+
     return (
         <Card className='col-lg-4 col-md-6 col-sm-12 col-12 b-none project-card' >
-            <Link to='/detail'>
+            <Link to={`/${lang}/detail`}>
                 <Card.Img variant="top" src={cardImage} />
                 <Card.Body>
                     <Card.Title>HOTEL</Card.Title>

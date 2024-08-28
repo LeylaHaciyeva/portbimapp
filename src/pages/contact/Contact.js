@@ -2,7 +2,9 @@ import React from 'react'
 import './Contact.css'
 import PageHeader from '../../components/header/pageheader/PageHeader'
 import Footer from '../../components/footer/Footer'
+import { useSelector } from 'react-redux'
 const Contact = () => {
+    let lang = useSelector((state) => state.languageReducer.lang)
     return (
         <div>
             <PageHeader />
@@ -24,7 +26,7 @@ const Contact = () => {
                             <input type="text" placeholder='Phone *' />
                         </div>
                         <div className='col-lg-12'>
-                            <p style={{color:"#777"}}>* These fields are required.</p>
+                            <p style={{ color: "#777" }}>* These fields are required.</p>
                         </div>
 
                     </div>
@@ -59,10 +61,31 @@ const Contact = () => {
                 </div>
             </div>
             <div className='map'>
-                <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d17184.858350154645!2d49.87861495316862!3d40.4114544126472!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40307d52be6c8699%3A0x6505ee210ccd92c0!2zNTVhIMaPbGl5YXIgxo9saXlldiwgQmFrxLE!5e0!3m2!1saz!2saz!4v1722507437752!5m2!1saz!2saz"
-                    width="100%" height="450" style={{ border: 0 }} allowfullscreen="" loading="lazy"
-                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+                {
+                    lang == "az" ?
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d17184.858350154645!2d49.87861495316862!3d40.4114544126472!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40307d52be6c8699%3A0x6505ee210ccd92c0!2zNTVhIMaPbGl5YXIgxo9saXlldiwgQmFrxLE!5e0!3m2!1saz!2saz!4v1722507437752!5m2!1saz!2saz"
+                            width="100%" height="450" style={{ border: 0 }} allowfullscreen="" loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        : null
+                }
+
+                {
+                    lang == "ru" ?
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3038.0139902546575!2d49.87029907595652!3d40.4085408561378!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40307d52be6c8699%3A0x6505ee210ccd92c0!2zNTVhIMaPbGl5YXIgxo9saXlldiwgQmFrxLE!5e0!3m2!1sru!2saz!4v1724841327581!5m2!1sru!2saz"
+                            width="100%" height="450" style={{ border: 0 }} allowfullscreen="" loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        : null
+                }
+                {
+                    lang == "en" ?
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3038.014173348863!2d49.872873999999996!3d40.4085368!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40307d52be6c8699%3A0x6505ee210ccd92c0!2s55a%20Aliyar%20Aliyev%2C%20Baku!5e0!3m2!1sen!2saz!4v1724841406614!5m2!1sen!2saz"
+                            width="100%" height="450" style={{ border: 0 }} allowfullscreen="" loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        : null
+                }
             </div>
             <Footer />
         </div>

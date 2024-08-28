@@ -7,14 +7,17 @@ import Navbar from '../../navbar/Navbar.js';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom'
 import { IoMoonOutline, IoSunnyOutline } from 'react-icons/io5';
+import { useTranslation } from 'react-i18next';
 const PageHeader = () => {
   let openMenu = useSelector((state) => state.menuReducer.openMenu)
   let theme = useSelector((state) => state.themeReducer.theme)
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const {t,i18n}=useTranslation()
   let lang = useSelector((state) => state.languageReducer.lang)
   let lngs = [{ id: 1, lng: "az" }, { id: 2, lng: "en" }, { id: 3, lng: "ru" }]
   const handleChangeLanguage = (event) => {
+    i18n.changeLanguage(event.target.value)
     dispatch({ type: event.target.value, payload: lang })
     navigate(`/${event.target.value}/${window.location.pathname.split('/').slice(2).join('/')}`);
   };
@@ -50,9 +53,9 @@ const PageHeader = () => {
                 <IoSunnyOutline color='black' size={25} />
               </div>
             </div>
-            <div className='header-search mr-2'>
+            {/* <div className='header-search mr-2'>
               <CiSearch cursor="pointer" color='black' size={25} className='' />
-            </div>
+            </div> */}
             <div className='language mr-2'>
               {/* <GrLanguage cursor="pointer" color='white' size={20} className='' /> */}
               <select id='page-language' value={lang} defaultValue={lang} onChange={handleChangeLanguage}>

@@ -3,11 +3,13 @@ import '../footer/Footer.css'
 import { FaFacebookF, FaLinkedinIn, FaYoutube } from "react-icons/fa";
 import { FaLongArrowAltUp } from "react-icons/fa";
 import { Link } from 'react-router-dom'
+import { useTranslation } from 'react-i18next';
 
 const Footer = () => {
     function handleScrolltoTop(){
         window.scrollTo(0,0)
     }
+    const {t} = useTranslation()
     return (
         <div className='footer'>
             <div className='container'>
@@ -18,25 +20,25 @@ const Footer = () => {
                         </div>
                         <ul className='footer-menu'>
                                 <li>
-                                    <Link to="/about" >About</Link>
+                                    <Link to="/about" >{t('About')}</Link>
                                 </li>
                                 <li>
-                                    <Link to="/projects" >Projects</Link>
+                                    <Link to="/projects" >{t('Projects')}</Link>
                                 </li>
                                 <li>
-                                    <Link to="/design" >Design and MEP</Link>
+                                    <Link to="/design" >{t('Design and MEP')}</Link>
                                 </li>
                                 <li>
-                                    <Link to="/bimservices" >BIM Services</Link>
+                                    <Link to="/bimservices" >{t('BIM Services')}</Link>
                                 </li>
                                 <li>
-                                    <Link to="/news" >News</Link>
+                                    <Link to="/news" >{t('News')}</Link>
                                 </li>
                                 <li>
-                                    <Link to="/careers" >Careers</Link>
+                                    <Link to="/careers" >{t('Career')}</Link>
                                 </li>
                                 <li>
-                                    <Link to="/contact" >Contact</Link>
+                                    <Link to="/contact" >{t('Contact')}</Link>
                                 </li>
                             </ul>
                     </div>
@@ -61,7 +63,7 @@ const Footer = () => {
                             </ul>
                             <button className='scrolltotop' onClick={handleScrolltoTop}>
                                 <p>
-                                    Back to top
+                                    {t("Back to top")}
                                 </p>
                                 <FaLongArrowAltUp />
                             </button>
