@@ -12,7 +12,7 @@ const NewsDetail = () => {
       <div className="newsdetail-header container-fluid mt-5 pt-4">
         <div className="container pt-5">
           <div className="row">
-            <div className="col-lg-12 d-flex">
+            <div className="col-lg-12 d-flex align-items-baseline">
               <Link className="goback" onClick={() => navigate(-1)}>
                 News
               </Link>

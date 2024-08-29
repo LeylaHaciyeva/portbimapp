@@ -1,7 +1,9 @@
 import React from 'react'
 import './ProjectHeader.css'
 import ProjectSearch from '../projectsearch/ProjectSearch.js'
+import { useTranslation } from 'react-i18next'
 const ProjectHeader = () => {
+    const {t} = useTranslation()
     return (
         < >
             <div className='project-header'>
@@ -10,13 +12,13 @@ const ProjectHeader = () => {
                         <div className='col-lg-6 col-md-6 col-sm-6 col-6'>
                             <div className='project-header-text'>
                                 <h2>
-                                    Projects
+                                {t('Projects')}
                                 </h2>
                             </div>
                         </div>
                         <div className='col-lg-6 col-md-6 col-sm-6 col-6 d-flex justify-content-end'>
                             <div className='project-count d-flex align-items-center'>
-                                <p>438 Projects</p>
+                                <p>438 {t('Projects')}</p>
                             </div>
                         </div>
                     </div>

@@ -1,7 +1,13 @@
 .footer {
     border-top: 1px solid #ebebeb;
-    margin: 60px 0;
+    margin: 60px 0 0 0;
     padding: 20px 0;
+    /* position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-color: white;
+    z-index: 23; */
 }
 
 .footer-menu {

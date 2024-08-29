@@ -1,7 +1,38 @@
-.career-card{
-    background: #f6f6f6;
-    border-radius: 15px;
-    padding: 15px;
-    color: black;
-    margin: 20px 0;
+.career-cards {
+  /* background: #f6f6f6; */
+  border-radius: 15px;
+  padding: 15px;
+  color: black;
+  margin: 20px 0;
+}
+.career-card {
+  background-color: #f6f6f6;
+  margin-bottom: 20px;
+  padding: 30px 15px;
+  border-radius: 10px;
+}
+.location {
+  font-size: 16px;
+  margin: 0;
+  line-height: 19px;
+  color: #4d4d4d;
+}
+.position {
+  font-size: 23px;
+  margin: 0;
+  line-height: 28px;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  max-height: 90px;
+  overflow: hidden;
+  color: black;
+}
+.career-card button {
+  background-color: #ffffff;
+  margin: 20px 30px 0 0;
+  border: none;
+  outline: none;
+  padding: 10px 15px;
+  border-radius: 25px;
 }

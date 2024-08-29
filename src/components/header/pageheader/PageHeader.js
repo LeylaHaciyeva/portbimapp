@@ -56,7 +56,7 @@ const PageHeader = () => {
             {/* <div className='header-search mr-2'>
               <CiSearch cursor="pointer" color='black' size={25} className='' />
             </div> */}
-            <div className='language mr-2'>
+            <div className='language mr-2 ml-2'>
               {/* <GrLanguage cursor="pointer" color='white' size={20} className='' /> */}
               <select id='page-language' value={lang} defaultValue={lang} onChange={handleChangeLanguage}>
                 {Object.values(lngs).map((lng) => (

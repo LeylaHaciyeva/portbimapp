@@ -34,11 +34,15 @@ const Career = () => {
           </div>
         </div>
       </div>
+      <div className="container career-cards">
+      <div className="row">
       {
         content?.map((item, index) => {
           return (<CareerCard key={index} item={item} />)
         })
       }
+      </div>
+      </div>
       <Footer />
     </div>
   )

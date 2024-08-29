@@ -1,0 +1,15 @@
+.goback {
+  color: #7a7a7a;
+  font-size: 25px;
+  margin-bottom: 20px;
+}
+.career-detail .position {
+  margin: 25px 0;
+}
+.career-detail p {
+    color: #7a7a7a;
+}
+
+.career-detail span {
+    color: black;
+}

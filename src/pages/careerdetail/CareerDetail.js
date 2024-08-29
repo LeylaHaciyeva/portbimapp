@@ -26,17 +26,20 @@ const CareerDetail = () => {
     return (
         <>
             {/* <PageHeader /> */}
-            <div className='container pt-5 mt-5'>
+            <div className='container pt-5 career-detail'>
                 <div className='row mt-5'>
                     <div className='col-lg-12'>
-                        <Link onClick={()=>navigate(-1)}>Go back</Link>
+                        <Link className='goback' onClick={()=>navigate(-1)}>Go back</Link>
                     </div>
                     <div className='col-lg-12'>
-                        <h1>{content?.position}</h1>
-                        <p>Vəzifə : {content?.position}</p>
-                        <p>İş Növü : {content?.type}</p>
-                        <p>İş Yeri : {content?.location}</p>
-                        <p>Departament : {content?.department}</p>
+                        <h1 className='position'>{content?.position}</h1>
+                        <p><span>Vəzifə :</span> {content?.position}</p>
+                        <p><span>İş Növü :</span> {content?.type}</p>
+                        <p><span>İş Yeri :</span> {content?.location}</p>
+                        <p><span>Departament :</span> {content?.department}</p>
+                        <p><span>Last date :</span> {content?.lastDate}</p>
+                        <p><span>Created date :</span> {content?.postedDate}</p>
+
                     </div>
                 </div>
                 <div className='row'>

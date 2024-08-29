@@ -1,121 +1,64 @@
-// import React, { useState, useRef, useEffect } from 'react';
-// import { Canvas } from '@react-three/fiber';
-// import { OrbitControls } from '@react-three/drei';
+// import React, { useRef, useEffect } from 'react';
 // import * as THREE from 'three';
-// import { IFCLoader } from 'web-ifc-three';
+// import { IfcLoader } from 'web-ifc-three';
+// import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
-// const IFCModel = ({ file }) => {
-//   const ref = useRef();
+// const IFCViewer = ({ ifcUrl }) => {
+//   const containerRef = useRef();
 
 //   useEffect(() => {
-//     if (!file) return;
+//     if (!ifcUrl || !containerRef.current) return;
 
-//     const loader = new IFCLoader();
-//     const reader = new FileReader();
+//     // Initialize scene
+//     const scene = new THREE.Scene();
+//     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+//     const renderer = new THREE.WebGLRenderer({ antialias: true });
+//     renderer.setSize(window.innerWidth, window.innerHeight);
+//     containerRef.current.appendChild(renderer.domElement);
 
-//     reader.onload = () => {
-//       const ifcData = reader.result;
-//       loader.parse(ifcData, (model) => {
-//         if (ref.current) {
-//           ref.current.clear(); // Clear any previous models
-//           ref.current.add(model);
-//         }
-//       }, (error) => {
-//         console.error('Error parsing IFC model:', error);
-//       });
-//     };
+//     // Add lighting
+//     const light = new THREE.DirectionalLight(0xffffff, 1);
+//     light.position.set(1, 1, 1).normalize();
+//     scene.add(light);
 
-//     reader.readAsArrayBuffer(file);
+//     // Set up controls
+//     const controls = new OrbitControls(camera, renderer.domElement);
+//     controls.enableDamping = true;
+//     controls.dampingFactor = 0.25;
+//     controls.enableZoom = true;
 
-//     return () => {
-//       if (ref.current) {
-//         ref.current.clear();
-//       }
-//     };
-//   }, [file]);
-
-//   return <group ref={ref} />;
-// };
-
-// const IFCViewer = () => {
-//   const [file, setFile] = useState(null);
-
-//   const handleFileChange = (event) => {
-//     const selectedFile = event.target.files[0];
-//     if (selectedFile) {
-//       setFile(selectedFile);
-//     }
-//   };
-
-//   return (
-//     <div>
-//       <input type="file" accept=".ifc" onChange={handleFileChange} />
-//       <Canvas style={{ height: '500px', width: '100%' }}>
-//         <ambientLight />
-//         <pointLight position={[10, 10, 10]} />
-//         <OrbitControls />
-//         <IFCModel file={file} />
-//       </Canvas>
-//     </div>
-//   );
-// };
-
-// export default IFCViewer;
-
-
-
-// // IFCViewer.js
-// import React, { useRef, useState, useEffect } from 'react';
-// import { Canvas } from '@react-three/fiber';
-// import { OrbitControls } from '@react-three/drei';
-// import { IFCLoader } from 'web-ifc-three';
-// import * as THREE from 'three';
-// import FileUpload from './FileUpload';
-
-// const IFCModel = ({ fileUrl }) => {
-//   const ref = useRef();
-
-//   useEffect(() => {
-//     if (!fileUrl) return;
-
-//     const loader = new IFCLoader();
+//     // Load IFC file
+//     const loader = new IfcLoader();
 //     loader.load(
-//       fileUrl,
-//       (model) => {
-//         if (ref.current) {
-//           ref.current.clear(); // Clear previous models
-//           ref.current.add(model);
-//         }
+//       ifcUrl,
+//       (ifcModel) => {
+//         scene.add(ifcModel);
 //       },
 //       undefined,
 //       (error) => {
-//         console.error('Error loading IFC model:', error);
+//         console.error('An error occurred loading the IFC file:', error);
 //       }
 //     );
-//   }, [fileUrl]);
 
-//   return <group ref={ref} />;
-// };
+//     camera.position.z = 10;
 
-// const IFCViewer = () => {
-//   const [fileUrl, setFileUrl] = useState(null);
+//     // Animation loop
+//     const animate = () => {
+//       requestAnimationFrame(animate);
+//       controls.update();
+//       renderer.render(scene, camera);
+//     };
+//     animate();
 
-//   const handleUploadSuccess = (filePath) => {    
-//     setFileUrl(`http://localhost:8081/${filePath}`);
-//   };
+//     // Cleanup
+//     return () => {
+//       if (containerRef.current) {
+//         containerRef.current.removeChild(renderer.domElement);
+//       }
+//     };
+//   }, [ifcUrl]);
 
-//   return (
-//     <div>
-//       <FileUpload onUploadSuccess={handleUploadSuccess} />
-//       <Canvas style={{ height: '500px', width: '100%' }}>
-//         <ambientLight />
-//         <pointLight position={[10, 10, 10]} />
-//         <OrbitControls />
-//         <IFCModel fileUrl={fileUrl} />
-//       </Canvas>
-//     </div>
-//   );
+//   return <div ref={containerRef} style={{ width: '100%', height: '100vh' }}></div>;
 // };
 
 // export default IFCViewer;
-

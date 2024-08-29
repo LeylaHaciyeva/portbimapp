@@ -52,10 +52,10 @@ const Header = () => {
                 <IoSunnyOutline color='white' size={25} />
               </div>
             </div>
-            <div className='header-search mr-2'>
+            {/* <div className='header-search mr-2'>
               <CiSearch cursor="pointer" color='white' size={25} className='' />
-            </div>
-            <div className='language mr-2'>
+            </div> */}
+            <div className='language mr-2 ml-2'>
               <select id='language' value={lang} defaultValue={lang} onChange={handleChangeLanguage}>
                 {Object.values(lngs).map((lng) => (
                   <option key={lng.id} value={lng.lng}>

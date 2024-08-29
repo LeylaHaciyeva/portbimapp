@@ -34,6 +34,16 @@ i18n
                     "Phone":"Phone",
                     "These fields are required.":" These fields are required.",
                     "Send Message":"Send Message",
+                    "All project types":"All project types",
+                    "Culture":"Culture",
+                    "Industry":"Industry",
+                    "Civic":"Civic",
+                    "Health":"Health",
+                    "All locations":"All locations",
+                    "Date":"Date",
+                    "Alphabetical":"Alphabetical",
+                    
+
                     
                 }
             },
